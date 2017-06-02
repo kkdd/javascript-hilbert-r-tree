@@ -1,10 +1,6 @@
-# Hilbert Packed R-Tree written in JavaScript (Typescript)
+# Hilbert Packed R-Tree written in JavaScript
 
 This is an implementation of a Hilbert Packed  R-Tree. R-Trees are a special data structure for indexing spatial data. To improve the performance of query operations on the data structure, the R-Tree has been packed using the  space filling [Hilbert Curve](https://en.wikipedia.org/wiki/Hilbert_curve).
-
-## Demo
-
-[Check out this link for a demo](http://jorgenkg.github.io/typescript-javascript-hilbert-r-tree/)
 
 ## Tutorial
 
@@ -56,22 +52,3 @@ var boundingRectangle = { x: 0,  y: 0, width: 5, height: 5 };
 var results           = tree.search( boundingRectangle ); // results will contain the first element of structuredData
 console.log( results ); // prints: [ "This can be anything" ]
 ```
-
-## Requirements
-
-*  [lodash](https://lodash.com)
-
-## Setting up the dev environment
-
-1. Install NodeJS and NPM
-2. Run `npm install` from the project directory
-3. Run `npm start` to initialize the automatic TypeScript compiling and browser refreshing
-
-## Kudos
-
-*  The TypeScript definitions published by [DefinitelyTyped](http://definitelytyped.org) has been essential.
-*  The project includes a fast implementation of a deep flattening function written by @willsp
-
-#### Other
-
-The demo uses the [Knockstrap library](http://faulknercs.github.io/Knockstrap/) written by @faulknercs, as well as jQuery, KnockoutJS and Bootstrap.
