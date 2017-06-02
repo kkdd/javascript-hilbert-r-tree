@@ -15,7 +15,7 @@ var tree     = new RTree( maxNodes );
 
 ``` javascript
 var structuredData = [
-  // {x coordinate, y coordinate, width, height, the data to store at this location}
+  // {x left-side coordinate, y lower-side coordinate, width, height, id (or the data to store at this location)}
   {x: 0,  y: 0,  width: 10, height: 10, id: "This can be anything"},
   {x: 10, y: 20, width: 15, height: 20, id: 123456                },
   {x: 20, y: 20, width: 20, height: 25, id: {even: "this"}        },
