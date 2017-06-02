@@ -1,6 +1,6 @@
 # Hilbert Packed R-Tree written in JavaScript
 
-This is an implementation of a Hilbert Packed  R-Tree. R-Trees are a special data structure for indexing spatial data. To improve the performance of query operations on the data structure, the R-Tree has been packed using the  space filling [Hilbert Curve](https://en.wikipedia.org/wiki/Hilbert_curve).
+This is an implementation of a Hilbert Packed [R-Tree](https://en.wikipedia.org/wiki/R-tree). R-Trees are a special data structure for indexing spatial data. To improve the performance of query operations on the data structure, the R-Tree has been packed using the  space filling [Hilbert Curve](https://en.wikipedia.org/wiki/Hilbert_curve).
 
 ## Tutorial
 
