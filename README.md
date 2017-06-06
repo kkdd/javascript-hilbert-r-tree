@@ -56,5 +56,5 @@ console.log( results ); // prints: [ "This can be anything" ]
 ##### Options
 ``` javascript
 var options = {xPeriod: 360, searchOverlapped: false, searchIndex: true};
-var resultIndexes = tree.search(boudingRect, options);
+var resultIndexes = tree.search(boudingRect, options); // the result indexed of data array
 ```
