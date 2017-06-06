@@ -52,3 +52,9 @@ var boundingRectangle = { x: 0,  y: 0, width: 5, height: 5 };
 var results           = tree.search( boundingRectangle ); // results will contain the first element of structuredData
 console.log( results ); // prints: [ "This can be anything" ]
 ```
+
+##### Options
+``` javascript
+var options = {xPeriod: 360, searchOverlapped: false, searchIndex: true};
+var resultIndexes = tree.search(boudingRect, options);
+```
