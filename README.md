@@ -53,7 +53,7 @@ var results           = tree.search( boundingRectangle ); // results will contai
 console.log( results ); // prints: [ "This can be anything" ]
 ```
 
-###### For cylindrical geometric coordinates
+###### For cylindrical geographic coordinates
 
 ``` javascript
 var options = {xPeriod: 360, searchOverlapped: false, searchIndex: true};
