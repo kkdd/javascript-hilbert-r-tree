@@ -62,4 +62,4 @@ var options = {xPeriod: 360, searchOverlapped: false, searchIndex: true};
 var resultIndexes = tree.search(boudingRect, options); // returns the indexes of data array
 ```
 
-<img href="./rectangles.jpg"></img>
+![search result](https://github.com/kkdd/javascript-hilbert-r-tree/blob/master/rectangles.jpg?raw=true)
