@@ -53,11 +53,9 @@ var results           = tree.search( boundingRectangle ); // results will contai
 console.log( results ); // prints: [ "This can be anything" ]
 ```
 
-###### Cylindrical geometric coordinates
+###### For cylindrical geometric coordinates
 
 ``` javascript
-var tree = new RTree(maxNodes);
-tree.batchInsert(rectsData);
 var options = {xPeriod: 360, searchOverlapped: false, searchIndex: true};
 var resultIndexes = tree.search(boudingRect, options); // returns the indexes of data array
 ```
