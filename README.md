@@ -56,7 +56,7 @@ console.log( results ); // prints: [ "This can be anything" ]
 ###### For cylindrical geographic coordinates
 
 ``` javascript
-var options = {xPeriod: 360, searchOverlapped: false, searchIndex: true};
+var options = {xPeriod: 360, searchOverlapped: false, searchIndex: true}; // coping with antimeridian
 var resultIndexes = tree.search(boudingRect, options); // returns the indexes of data array
 ```
 
