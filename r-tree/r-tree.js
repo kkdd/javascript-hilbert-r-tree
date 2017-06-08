@@ -93,17 +93,17 @@ var RTree = (function () {
         this.count = 0;
         this.root = RTreeRectangle.generateEmptyNode();
     }
-    RTree.prototype._recursiveSeach = function (searchRect, node, searchOverlapped, searchData) {
+    RTree.prototype._recursiveSeach = function (searchRect, node, includedOnly, searchData) {
         var _this = this;
         if (searchRect.contains(node)) {
             return node.getSubtreeData(searchData);
         }
 		else if (node.isLeafNode()) {
-		    return (searchOverlapped===true)?node.getSubtreeData(searchData):[];
+		    return (includedOnly===true)?[]:node.getSubtreeData(searchData);
 		}
         else {
             var overlapped = node.children.filter(function (x) {return x.overlaps(searchRect);});
-            return overlapped.map(function (iterateNode) {return _this._recursiveSeach(searchRect, iterateNode, searchOverlapped, searchData)}).flatten();
+            return overlapped.map(function (iterateNode) {return _this._recursiveSeach(searchRect, iterateNode, includedOnly, searchData)}).flatten();
         }
     };
 
@@ -121,7 +121,7 @@ var RTree = (function () {
         };
         var result = iCycle.map(function (i) {
 	        var searchRect = new RTreeRectangle(i*xperi + searchBoundary.x, searchBoundary.y, searchBoundary.width, searchBoundary.height, null, null);
-	        return _this._recursiveSeach(searchRect, _this.root, options.searchOverlapped, searchData);
+	        return _this._recursiveSeach(searchRect, _this.root, options.includedOnly, searchData);
 	    });
 	    return result.flatten();
     };
