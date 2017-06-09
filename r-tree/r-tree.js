@@ -78,11 +78,11 @@ var RTreeRectangle = (function () {
     RTreeRectangle.prototype.removeChildRectangle = function (removeRect) {
         this.children.splice(this.children.indexOf(removeRect), 1);
     };
-    RTreeRectangle.prototype.getSubtreeData = function (searchData) {
+    RTreeRectangle.prototype.getSubtreeData = function (indexData) {
         if (this.children.length === 0) {
-            return [this[searchData]];
+            return [this[indexData]];
         }
-        return this.children.map(function (x) {return x.getSubtreeData(searchData)}).flatten();
+        return this.children.map(function (x) {return x.getSubtreeData(indexData)}).flatten();
     };
     return RTreeRectangle;
 }());
@@ -93,35 +93,35 @@ var RTree = (function () {
         this.count = 0;
         this.root = RTreeRectangle.generateEmptyNode();
     }
-    RTree.prototype._recursiveSeach = function (searchRect, node, includedOnly, searchData) {
+    RTree.prototype._recursiveSeach = function (searchRect, node, includedOnly, indexData) {
         var _this = this;
         if (searchRect.contains(node)) {
-            return node.getSubtreeData(searchData);
+            return node.getSubtreeData(indexData);
         }
 		else if (node.isLeafNode()) {
-		    return (includedOnly===true)?[]:node.getSubtreeData(searchData);
+		    return (includedOnly===true)?[]:node.getSubtreeData(indexData);
 		}
         else {
             var overlapped = node.children.filter(function (x) {return x.overlaps(searchRect);});
-            return overlapped.map(function (iterateNode) {return _this._recursiveSeach(searchRect, iterateNode, includedOnly, searchData)}).flatten();
+            return overlapped.map(function (iterateNode) {return _this._recursiveSeach(searchRect, iterateNode, includedOnly, indexData)}).flatten();
         }
     };
 
     RTree.prototype.search = function (searchBoundary, options) {
 	    if (!options) {options = {}}
         var xperi, iCycle, _this = this;
-        var searchData = options.searchIndex?"leafIndex":"data";
+        var indexData = options.searchIndex?"leafIndex":"data";
         if (!options.xPeriod) {xperi = 0; iCycle = [0];}
         else {
             xperi = options.xPeriod;
             var dx = _this.root.x - searchBoundary.x;
             var nmin = Math.ceil((dx - searchBoundary.width)/xperi);
             var nmax = Math.floor((dx + _this.root.width)/xperi);
-            iCycle = range(nmin, nmax+1);
+            iCycle = nRange(nmin, nmax+1);
         };
         var result = iCycle.map(function (i) {
 	        var searchRect = new RTreeRectangle(i*xperi + searchBoundary.x, searchBoundary.y, searchBoundary.width, searchBoundary.height, null, null);
-	        return _this._recursiveSeach(searchRect, _this.root, options.includedOnly, searchData);
+	        return _this._recursiveSeach(searchRect, _this.root, options.includedOnly, indexData);
 	    });
 	    return result.flatten();
     };
@@ -163,12 +163,12 @@ var RTree = (function () {
     };
     RTree.prototype.batchInsert = function (listOfData) {
         var count = this.count;
-        var listOfRectangles = listOfData.map(function (dataPoint, i) {
+        var rectangles = listOfData.map(function (dataPoint, i) {
             return new RTreeRectangle(dataPoint.x, dataPoint.y, dataPoint.width, dataPoint.height, dataPoint.data, i + count);
         });
-        var sorted = HilbertCurves.sortRect(listOfRectangles);
+        var sorted = HilbertCurves.sortRect(rectangles);
         this.root = this._recursiveTreeLayer(sorted)[0];
-        this.count += listOfRectangles.length;
+        this.count += listOfData.length;
     };
 
     RTree.prototype.balanceTreePath = function (leafRectangle) {
@@ -247,7 +247,8 @@ var HilbertCurves;
     }
 })(HilbertCurves || (HilbertCurves = {}));
 
-range = function(imin, nrange) {
+
+nRange = function(imin, nrange) {
     var rng = Array.from(Array(nrange?nrange-imin:imin).keys());
     return rng.map(function (i) {return i+(nrange?imin:0)});
 }
