@@ -60,6 +60,6 @@ var options = {xPeriod: 360, includedOnly: true, searchIndex: true}; // coping w
 var resultIndexes = tree.search(boudingRect, options); // returns the indexes of data array
 ```
 
-The two of the following result rectangles (blue) cross on the antimeridian. The querying rectangle ```boudingRect``` (green) also crosses on the antimeridian.
+[[Demonstration](https://bl.ocks.org/kkdd/92a185b33e387aa1de19cbce2ba7464f)]: The two of the following result rectangles (blue) cross on the antimeridian. The querying rectangle ```boudingRect``` (green) also crosses on the antimeridian.
 
 ![search result](https://github.com/kkdd/javascript-hilbert-r-tree/blob/master/rectangles.jpg?raw=true)
