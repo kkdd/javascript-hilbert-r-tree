@@ -109,19 +109,19 @@ var RTree = (function () {
 
     RTree.prototype.search = function (searchBoundary, options) {
 	    if (!options) {options = {}}
-        var xperi, iCycle, _this = this;
+        var cycles, _this = this;
         var indexData = options.searchIndex?"leafIndex":"data";
-        if (!options.xPeriod) {xperi = 0; iCycle = [0];}
+        if (!options.xPeriod) {cycles = [0];}
         else {
-            xperi = options.xPeriod;
+            var xperi = options.xPeriod;
             var dx = _this.root.x - searchBoundary.x;
-            var nmin = Math.ceil((dx - searchBoundary.width)/xperi);
-            var nmax = Math.floor((dx + _this.root.width)/xperi);
-            iCycle = nRange(nmin, nmax+1);
-        };
-        var result = iCycle.map(function (i) {
-	        var searchRect = new RTreeRectangle(i*xperi + searchBoundary.x, searchBoundary.y, searchBoundary.width, searchBoundary.height, null, null);
-	        return _this._recursiveSeach(searchRect, _this.root, options.includedOnly, indexData);
+            var start = Math.ceil((dx - searchBoundary.width)/xperi);
+            var len = Math.floor((dx + _this.root.width)/xperi) - start + 1;
+            cycles = Array.from(Array(len), (_, i) => (start+i)*xperi); // range()
+        }
+        var result = cycles.map(function (dx) {
+	        var searchRect = new RTreeRectangle(dx + searchBoundary.x, searchBoundary.y, searchBoundary.width, searchBoundary.height, null, null);
+ 	        return _this._recursiveSeach(searchRect, _this.root, options.includedOnly, indexData);
 	    });
 	    return result.flatten();
     };
